@@ -4,25 +4,40 @@
 	<title>FORM LOGIN</title>
 </head>
 <body>
-	<h2>Halaman Admin</h2>
-	
+	<h2>Silahkan Login</h2>
 	<br/>
- 
-	<!-- cek apakah sudah login -->
+	<!-- cek pesan notifikasi -->
 	<?php 
-	session_start();
-	if($_SESSION['status']!="login"){
-		header("location:../index.php?pesan=belum_login");
+	if(isset($_GET['pesan'])){
+		if($_GET['pesan'] == "gagal"){
+			echo "Login gagal! username dan password salah!";
+		}else if($_GET['pesan'] == "logout"){
+			echo "Anda telah berhasil logout";
+		}else if($_GET['pesan'] == "belum_login"){
+			echo "Anda harus login untuk mengakses halaman data";
+		}
 	}
 	?>
- 
-	<h4>Selamat datang, <?php echo $_SESSION['username']; ?>! anda telah login.</h4>
- 
 	<br/>
 	<br/>
- 
-	<a href="logout.php">LOGOUT</a>
- 
- 
+	<form method="post" action="cek_login.php">
+		<table>
+			<tr>
+				<td>Username</td>
+				<td>:</td>
+				<td><input type="text" name="username" placeholder="Masukkan username"></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td>:</td>
+				<td><input type="password" name="password" placeholder="Masukkan password"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td><input type="submit" value="LOGIN"></td>
+			</tr>
+		</table>			
+	</form>
 </body>
 </html>
